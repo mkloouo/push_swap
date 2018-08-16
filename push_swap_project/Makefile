@@ -1,42 +1,67 @@
-SRC_DIR			:= source
-INC_DIR			:= include
-OBJ_DIR			:= build
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/08/16 20:46:58 by modnosum          #+#    #+#              #
+#    Updated: 2018/08/16 21:49:52 by modnosum         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRC_EXT			:= c
-OBJ_EXT			:= o
+SRC_DIR		:= source
+INC_DIR		:= include
+OBJ_DIR		:= build
 
-CC			:= cc
-CFLAGS			:=
-IFLAGS			:= -I $(INC_DIR)
-LFLAGS			:=
+SRC_EXT		:= c
+OBJ_EXT		:= o
 
-NAME			:= print_memory
+libft_PATH	:= ../libft/
+include ../libft/Project.mk
 
-SRCS			:= $(shell find $(SRC_DIR) -type f -name *.$(SRC_EXT))
-OBJS			:= $(patsubst $(SRC_DIR)%.$(SRC_EXT),$(OBJ_DIR)%.$(OBJ_EXT),$(SRCS))
+CC			:= gcc
+CFLAGS		:= -Wall -Werror -Wextra -pedantic
+IFLAGS		+= -I $(INC_DIR)
+LFLAGS		+=
+
+MFLAGS		?= --no-print-directory
+
+NAME		:= push_swap
+
+SRCS		:= $(shell find $(SRC_DIR) -type f -name *.$(SRC_EXT))
+OBJS		:= $(patsubst $(SRC_DIR)%.$(SRC_EXT),$(OBJ_DIR)%.$(OBJ_EXT),$(SRCS))
+DIRS		:= $(sort $(dir $(OBJS)))
+
+RESET_COLOR	?= \e[0m
+RED_COLOR	?= \e[31m
+GREEN_COLOR	?= \e[32m
 
 .MAIN: all
-.PHONY: all clean re
-
-RESET_COLOR		:= \e[0m
-RED_COLOR		:= \e[31m
-GREEN_COLOR		:= \e[32m
+.PHONY: all fclean clean re libs
 
 all: $(NAME)
+
 clean:
 	@rm -Rf $(OBJ_DIR)
 	@printf "$(RED_COLOR)%-30s\n$(RESET_COLOR)" "Removed $(OBJ_DIR)"
+
+fclean: clean
 	@rm -Rf $(NAME)
 	@printf "$(RED_COLOR)%-30s\n$(RESET_COLOR)" "Removed $(NAME)"
+
 re: clean all
 
-$(OBJ_DIR):
+libs: $(libft_DEPS)
+	@$(MAKE) $(MFLAGS) -C $(libft_PATH) all
+
+$(DIRS):
 	@mkdir -p $@
 
-$(OBJ_DIR)/%.$(OBJ_EXT): $(SRC_DIR)/%.$(SRC_EXT) | $(OBJ_DIR)
+$(OBJ_DIR)/%.$(OBJ_EXT): $(SRC_DIR)/%.$(SRC_EXT) | $(DIRS)
 	@$(CC) -o $@ -c $< $(IFLAGS) $(CFLAGS)
 	@printf "%-30s -> %s\n" $< $@
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) | libs
 	@$(CC) -o $@ $^ $(LFLAGS) $(IFLAGS) $(CFLAGS)
 	@printf "$(GREEN_COLOR)%-30s\n$(RESET_COLOR)" "Built $(NAME)"
