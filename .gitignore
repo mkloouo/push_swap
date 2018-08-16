@@ -1,12 +1,5 @@
-build/
-
-*.so
-*.a
-*.o
-
 *~
 .*~
 \#*\#
-
-.idea/
-.vscode/
+checker
+push_swap
