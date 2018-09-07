@@ -6,7 +6,7 @@
 #    By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/13 16:41:30 by modnosum          #+#    #+#              #
-#    Updated: 2018/08/16 22:00:03 by modnosum         ###   ########.fr        #
+#    Updated: 2018/09/07 18:32:50 by modnosum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ libft_DIR		:= libft
 NAME			:= checker push_swap
 
 .MAIN: all
-.PHONY: all checker push_swap libft clean fclean re
+.PHONY: all checker push_swap libft clean fclean re c f
 
 all: $(NAME)
 checker:
@@ -41,3 +41,6 @@ fclean:
 	@rm -Rf push_swap
 	@$(MAKE) $(MFLAGS) -C $(libft_DIR) fclean
 re: fclean all
+
+c: clean
+f: fclean

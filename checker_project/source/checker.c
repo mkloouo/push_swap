@@ -1,5 +1,5 @@
 #include <checker.h>
-#include <ftio.h>
+#include <ft/io.h>
 
 int	main(void)
 {
