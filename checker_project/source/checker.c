@@ -1,14 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/08 15:12:38 by modnosum          #+#    #+#             */
+/*   Updated: 2018/09/08 15:12:46 by modnosum         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <checker.h>
-#include <ft/io.h>
 
 int	main(void)
 {
-	foo();
-	ft_putendl("\nLines with libft help!");
 	return (0);
-}
-
-void	foo(void)
-{
-	write(STDOUT_FILENO, "foo from checker", 16);
 }
