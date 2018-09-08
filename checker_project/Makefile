@@ -6,7 +6,7 @@
 #    By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/16 20:46:58 by modnosum          #+#    #+#              #
-#    Updated: 2018/08/16 21:48:10 by modnosum         ###   ########.fr        #
+#    Updated: 2018/09/08 15:06:11 by modnosum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_EXT		:= c
 OBJ_EXT		:= o
 
 libft_PATH	:= ../libft/
-include ../libft/Project.mk
+include		$(libft_PATH)/Project.mk
 
 CC			:= gcc
 CFLAGS		:= -Wall -Werror -Wextra -pedantic
@@ -38,30 +38,29 @@ RED_COLOR	?= \e[31m
 GREEN_COLOR	?= \e[32m
 
 .MAIN: all
-.PHONY: all fclean clean re libs
+.PHONY: all fclean clean re c f
 
 all: $(NAME)
-
+c: clean
 clean:
-	@rm -Rf $(OBJ_DIR)
-	@printf "$(RED_COLOR)%-30s\n$(RESET_COLOR)" "Removed $(OBJ_DIR)"
-
+	@rm -fr $(OBJ_DIR)
+	@$(call REMOVED_FILE,$(OBJ_DIR))
+f: fclean
 fclean: clean
-	@rm -Rf $(NAME)
-	@printf "$(RED_COLOR)%-30s\n$(RESET_COLOR)" "Removed $(NAME)"
-
+	@rm -fr $(NAME)
+	@$(call REMOVED_FILE,$(NAME))
 re: clean all
-
-libs: $(libft_DEPS)
-	@$(MAKE) $(MFLAGS) -C $(libft_PATH) all
 
 $(DIRS):
 	@mkdir -p $@
 
 $(OBJ_DIR)/%.$(OBJ_EXT): $(SRC_DIR)/%.$(SRC_EXT) | $(DIRS)
 	@$(CC) -o $@ -c $< $(IFLAGS) $(CFLAGS)
-	@printf "%-30s -> %s\n" $< $@
+	@$(call CREATED_FILE,$@,$<);
 
-$(NAME): $(OBJS) | libs
+$(libft_NAME): $(libft_DEPS)
+	@$(MAKE) $(MFLAGS) -C $(libft_PATH) all
+
+$(NAME): $(OBJS) | $(libft_NAME)
 	@$(CC) -o $@ $^ $(LFLAGS) $(IFLAGS) $(CFLAGS)
-	@printf "$(GREEN_COLOR)%-30s\n$(RESET_COLOR)" "Built $(NAME)"
+	@$(call FINISHED_FILE,$@);
