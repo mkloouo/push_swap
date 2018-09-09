@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 21:09:32 by modnosum          #+#    #+#             */
-/*   Updated: 2018/09/09 00:25:07 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/09/09 15:42:57 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@
 # define RROTATE_BOTH_CMD_STR "rrr"
 
 # ifdef DEBUG
-#  define PRINT_A_CMD_STR "da"
-#  define PRINT_B_CMD_STR "db"
 #  define PRINT_BOTH_CMD_STR "dd"
-#  define VALID_CMDS_COUNT 14
+#  define VALID_CMDS_COUNT 12
 # endif
 
 # ifndef VALID_CMDS_COUNT
@@ -79,8 +77,6 @@ typedef struct		s_stack_command
 	t_command_f		func;
 }					t_stack_cmd;
 
-void				push_from_to(t_stack *stack_a, t_stack *stack_b);
-
 t_bool				fill_number_stack(t_stack *stack, char **av);
 void				delete_number_stacks(t_stack *stack_a, t_stack *stack_b);
 t_bool				read_commands(t_stack *stack_a, t_stack *stack_b);
@@ -90,5 +86,13 @@ void				execute_command(t_stack_cmd cmd,
 					t_stack *stack_a, t_stack *stack_b);
 
 t_bool				is_sorted_number_stack(t_stack *stack);
+
+void				push_from_to(t_stack *stack_a, t_stack *stack_b);
+
+void				print_two_stacks(t_stack *stack_a, t_stack *stack_b);
+
+void				swap_two_stacks(t_stack *stack_a, t_stack *stack_b);
+void				rotate_two_stacks(t_stack *stack_a, t_stack *stack_b);
+void				rrotate_two_stacks(t_stack *stack_a, t_stack *stack_b);
 
 #endif

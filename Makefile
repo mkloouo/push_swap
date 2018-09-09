@@ -6,7 +6,7 @@
 #    By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/13 16:41:30 by modnosum          #+#    #+#              #
-#    Updated: 2018/09/07 18:32:50 by modnosum         ###   ########.fr        #
+#    Updated: 2018/09/09 15:42:03 by modnosum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,12 @@ push_swap:
 	@cp $(push_swap_DIR)/$@ .
 libft:
 	@$(MAKE) $(MFLAGS) -C $(libft_DIR) all
+c: clean
 clean:
 	@$(MAKE) $(MFLAGS) -C $(checker_DIR) clean
 	@$(MAKE) $(MFLAGS) -C $(push_swap_DIR) clean
 	@$(MAKE) $(MFLAGS) -C $(libft_DIR) clean
+f: fclean
 fclean:
 	@$(MAKE) $(MFLAGS) -C $(checker_DIR) fclean
 	@rm -Rf checker
@@ -42,5 +44,8 @@ fclean:
 	@$(MAKE) $(MFLAGS) -C $(libft_DIR) fclean
 re: fclean all
 
-c: clean
-f: fclean
+n: norm
+norm:
+	@$(MAKE) $(MFLAGS) -C $(checker_DIR) norm
+	@$(MAKE) $(MFLAGS) -C $(push_swap_DIR) norm
+	@$(MAKE) $(MFLAGS) -C $(libft_DIR) norm

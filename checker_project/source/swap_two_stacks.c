@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_sorted_number_stack.c                           :+:      :+:    :+:   */
+/*   swap_two_stacks.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/08 20:56:03 by modnosum          #+#    #+#             */
-/*   Updated: 2018/09/09 16:11:32 by modnosum         ###   ########.fr       */
+/*   Created: 2018/09/09 14:42:48 by modnosum          #+#    #+#             */
+/*   Updated: 2018/09/09 14:49:47 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <checker.h>
 
-t_bool				is_sorted_number_stack(t_stack *stack)
+void    swap_two_stacks(t_stack *stack_a, t_stack *stack_b)
 {
-	int				number;
-	int				prev_number;
-	t_stack_element	*element;
-
-	prev_number = *((int*)stack->top->data);
-	element = stack->top->prev;
-	while (element && element != stack->top)
-	{
-		number = *((int*)element->data);
-		if (number <= prev_number)
-			return (FALSE);
-		element = element->prev;
-		prev_number = number;
-	}
-	return (TRUE);
+    ft_stack_swap_top(stack_a);
+    ft_stack_swap_top(stack_b);
 }
