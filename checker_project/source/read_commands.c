@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 20:51:57 by modnosum          #+#    #+#             */
-/*   Updated: 2018/09/09 16:06:05 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/09/09 16:25:26 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@ t_bool			read_commands(t_stack *stack_a, t_stack *stack_b)
 			execute_command(cmd, stack_a, stack_b);
 		else
 		{
+#ifndef DEBUG
 			delete_number_stacks(stack_a, stack_b);
 			ft_fdprintf(IO_STDERR, "Error\n");
 			return (FALSE);
+#else
+			ft_printf("invalid cmd: %s\n", command);
+#endif
 		}
 		free(command);
 	}

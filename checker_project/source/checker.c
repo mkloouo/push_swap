@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 15:12:38 by modnosum          #+#    #+#             */
-/*   Updated: 2018/09/09 16:06:15 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/09/09 16:25:30 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int					main(int ac, char **av)
 {
+	size_t			initial_size;
 	t_stack			*stack_a;
 	t_stack			*stack_b;
 
@@ -30,9 +31,11 @@ int					main(int ac, char **av)
 		ft_fdprintf(IO_STDERR, "Error\n");
 		return (1);
 	}
+	initial_size = stack_a->size;
 	if (read_commands(stack_a, stack_b))
 	{
-		ft_printf("%s\n", (is_sorted_number_stack(stack_a) ? "OK" : "KO"));
+		ft_printf("%s\n", (stack_a->size != initial_size ||
+			!is_sorted_number_stack(stack_a) ? "KO" : "OK"));
 		delete_number_stacks(stack_a, stack_b);
 		return (0);
 	}
